@@ -18,7 +18,8 @@ export const handler = middy()
     const todoId = event.pathParameters.todoId;
     const authorization = event.headers.Authorization
     const userId = parseUserIdUtil(authorization)
-
+    console.log('userId: ', userId)
+    console.log('todoId: ', todoId)
     const validTodo = await existTodo(todoId, userId)
     if (!validTodo) {
       return {
@@ -28,7 +29,7 @@ export const handler = middy()
         })
       }
     }
-    const newItem = await createImage(todoId, event)
+    const newItem = await createImage(userId, todoId, event)
 
     return {
       statusCode: 201,

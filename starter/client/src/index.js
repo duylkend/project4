@@ -5,14 +5,30 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './App'
 import './index.css'
 
-const domain = "dev-65v1viuq825gt6fc.us.auth0.com"
-const clientId = "nKWDfBw8rnPBihtaaEPDcW9xZ3vra6ot"
+// const domain = "dev-65v1viuq825gt6fc.us.auth0.com"
+// const clientId = "nKWDfBw8rnPBihtaaEPDcW9xZ3vra6ot"
+const domain = process.env.REACT_APP_AUTH0_DOMAIN
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
+// ReactDOM.render(
+//   <Auth0Provider
+//     domain={domain}
+//     clientId={clientId}
+//     redirectUri={window.location.origin}
+//     audience={`https://dev-65v1viuq825gt6fc.us.auth0.com/api/v2/`}
+//     scope="read:todo write:todo delete:todo"
+//   >
+//     <App />
+//   </Auth0Provider>,
+//   document.getElementById('root')
+// )
+
+
 ReactDOM.render(
   <Auth0Provider
     domain={domain}
     clientId={clientId}
     redirectUri={window.location.origin}
-    audience={`https://dev-65v1viuq825gt6fc.us.auth0.com/api/v2/`}
+    audience={`https://${domain}/api/v2/`}
     scope="read:todo write:todo delete:todo"
   >
     <App />

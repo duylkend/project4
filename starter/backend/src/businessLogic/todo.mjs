@@ -10,20 +10,20 @@ export async function createTodo(createTodoRequest, userId) {
   return await todoAccess.createTodo({
     todoId: itemId,
     userId: userId,
-    attachmentUrl: createTodoRequest.attachmentUrl,
-    dueDate: createTodoRequest.dueDate,
+    attachmentUrl: null,
+    dueDate: null,
     createdAt: new Date().toISOString(),
     name: createTodoRequest.name,
-    done: createTodoRequest.done
+    done: false
   })
 }
 
-export async function deleteTodo(createTodoRequest, userId) {
-  return await todoAccess.deleteTodo(createTodoRequest.todoId, userId);
+export async function deleteTodo(todoId, userId) {
+  return await todoAccess.deleteTodo(todoId, userId);
 }
 
-export async function existTodo(createTodoRequest, userId) {
-  return await todoAccess.todoExists(createTodoRequest.todoId, userId);
+export async function existTodo(todoId, userId) {
+  return await todoAccess.todoExists(todoId, userId);
 }
 
 

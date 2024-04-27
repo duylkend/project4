@@ -30,6 +30,8 @@ export const handler = middy()
         })
       }
     }
+
+    const urlImage = await existTodo(todoId, userId)
     const result = await updateTodo(todo)
       return {
         statusCode: 200,

@@ -6,7 +6,7 @@ const todoTable = process.env.TODOS_TABLE
 export class TodoAccess {
   async createTodo(todo) {
     console.log(`Creating a todo with id ${todo.todoId}`)
-
+    console.log(`Creating todo ${todo}`)
     await dynamoDbClient.put({
       TableName: todoTable,
       Item: todo
@@ -22,15 +22,26 @@ export class TodoAccess {
     await dynamoDbClient.update({
       TableName: todoTable,
       Key: { userId, todoId },
-      UpdateExpression: 'SET name = :value1, done = :value2',
+      UpdateExpression: 'SET done = :value1, dueDate = :value2',
       ExpressionAttributeValues: {
-        ':value1': todo.name,
-        ':value2': todo.done
+        ':value1': todo.done,
+        ':value2': todo.dueDate
       },
       ReturnValues: 'ALL_NEW'
     })
-    .promise();
-    return todo
+  }
+
+  async updateUrlImageTodo(userId, todoId, attachmentUrl) {
+    console.log(`Updating a todo with id ${todoId}`)
+    await dynamoDbClient.update({
+      TableName: todoTable,
+      Key: { userId, todoId },
+      UpdateExpression: 'SET attachmentUrl = :value1',
+      ExpressionAttributeValues: {
+        ':value1': attachmentUrl
+      },
+      ReturnValues: 'ALL_NEW'
+    })
   }
 
 
